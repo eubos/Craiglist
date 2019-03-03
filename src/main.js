@@ -25,5 +25,10 @@ new Vue({
       storageBucket: 'craiglist-fbffa.appspot.com',
       messagingSenderId: '609098873029'
     })
+    fb.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.$store.dispatch('autoLoginUser', user)
+      }
+    })
   }
 })
