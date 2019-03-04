@@ -28,7 +28,7 @@ export default {
     computed:{
         ad(){
             const id = this.id
-            return this.$store.getters.addById(id)
+            return this.$store.getters.adById(id)
         }
     }
 }

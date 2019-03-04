@@ -35,6 +35,7 @@
                   type="password"
                   v-model="confirmPassword"
                   :rules="confirmPasswordRules"
+                  @keydown.enter="onSubmit"
                   ></v-text-field>
                 </v-form>
               </v-card-text>

@@ -27,6 +27,7 @@
                   type="password"
                   v-model="password"
                   :rules="passwordRules"
+                  @keydown.enter="onSubmit"
                   ></v-text-field>
                 </v-form>
               </v-card-text>
