@@ -29,7 +29,6 @@ export default {
       commit('setLoading', true)
 
       const image = payload.image
-
       try {
         const newAd = new Ad(
           payload.title,
@@ -38,17 +37,15 @@ export default {
           '',
           payload.promo
         )
-
         const ad = await fb.database().ref('ads').push(newAd)
         const imageExt = image.name.slice(image.name.lastIndexOf('.'))
-
         const fileData = await fb.storage().ref(`ads/${ad.key}.${imageExt}`).put(image)
-        const imageSrc = fileData.metadata.downloadURLs[0]
-
+        console.log(fileData)
+        const imageSrc = await fileData.ref.getDownloadURL()
+        console.log(imageSrc)
         await fb.database().ref('ads').child(ad.key).update({
           imageSrc
         })
-
         commit('setLoading', false)
         commit('createAd', {
           ...newAd,

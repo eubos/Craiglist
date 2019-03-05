@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
-//  @ - указывает на корень (src)
+import AuthGuard from './auth-guard'
 import Home from '@/components/Home'
 import Ad from '@/components/Ads/Ad'
 import AdList from '@/components/Ads/AdList'
@@ -9,7 +8,6 @@ import NewAd from '@/components/Ads/NewAd'
 import Login from '@/components/Auth/Login'
 import Registration from '@/components/Auth/Registration'
 import Orders from '@/components/User/Orders'
-import AuthGuard from './auth-guard'
 
 Vue.use(Router)
 
@@ -22,13 +20,13 @@ export default new Router({
     },
     {
       path: '/ad/:id',
-      name: 'ad',
       props: true,
+      name: 'ad',
       component: Ad
     },
     {
       path: '/list',
-      name: 'adList',
+      name: 'list',
       component: AdList,
       beforeEnter: AuthGuard
     },
