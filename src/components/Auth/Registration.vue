@@ -15,24 +15,32 @@
                 type="email"
                 v-model="email"
                 :rules="emailRules"
+                @keydown.enter="onSubmit"
               ></v-text-field>
               <v-text-field
+                :append-icon="show1 ? 'visibility' : 'visibility_off'"
+                @click:append="show1 = !show1"
                 prepend-icon="lock"
                 name="password"
+                hint="At least 6 characters"
                 label="Password"
-                type="password"
-                :counter="6"
+                :type="show1 ? 'text' : 'password'"
                 v-model="password"
                 :rules="passwordRules"
+                counter
+                @keydown.enter="onSubmit"
               ></v-text-field>
               <v-text-field
+              :append-icon="show2 ? 'visibility' : 'visibility_off'"
+                @click:append="show2 = !show2"
                 prepend-icon="lock"
                 name="confirm-password"
                 label="Confirm Password"
-                type="password"
-                :counter="6"
+                :type="show2 ? 'text' : 'password'"
+                :counter= this.password.length
                 v-model="confirmPassword"
                 :rules="confirmPasswordRules"
+                @keydown.enter="onSubmit"
               ></v-text-field>
             </v-form>
           </v-card-text>
@@ -43,7 +51,7 @@
               @click="onSubmit"
               :loading="loading"
               :disabled="!valid || loading"
-            >Create account!</v-btn>
+            >Create account</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -57,6 +65,8 @@
   export default {
     data () {
       return {
+        show1: false,
+        show2: false,
         email: '',
         password: '',
         confirmPassword: '',

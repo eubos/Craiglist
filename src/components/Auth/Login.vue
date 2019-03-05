@@ -18,12 +18,15 @@
               ></v-text-field>
               <v-text-field
                 prepend-icon="lock"
+                :append-icon="show1 ? 'visibility' : 'visibility_off'"
+                @click:append="show1 = !show1"
+                :type="show1 ? 'text' : 'password'"
                 name="password"
                 label="Password"
-                type="password"
-                :counter="6"
                 v-model="password"
                 :rules="passwordRules"
+                counter
+                @keydown.enter="onSubmit"
               ></v-text-field>
             </v-form>
           </v-card-text>
@@ -48,6 +51,7 @@
   export default {
     data () {
       return {
+        show1: false,
         email: '',
         password: '',
         valid: false,
